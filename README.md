@@ -37,3 +37,4 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 ## Diagrama del flujo de trabajo del programa
 ![Diagrama](docs/diagrama.jpg)
  
+## Declaracion legal
