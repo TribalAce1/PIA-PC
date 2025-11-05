@@ -9,7 +9,7 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 ## Estrucrura del proyecto
 ```text
 /
-|
+│
 ├── src/
 │   ├── AutoForense.py          # Codigo principal del proyecto
 │   ├── FuncionesForenses.psm1  # Funciones de investigacion forense
