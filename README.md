@@ -25,9 +25,9 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 ```
 
 ## Propositos
-Autoforense.py Captura las tareas a revisar que seleccione el usuario
-FuncionesForenses.psm1 envia los datos recopilados a la Inteligencia Artificial (IA)
-La IA ejecuta codigos aplacer hasta auditar los requerido y despues de eso genera un reporte y lo devuelve en formato PDF
+- Autoforense.py Captura las tareas a revisar que seleccione el usuario
+- FuncionesForenses.psm1 envia los datos recopilados a la Inteligencia Artificial (IA)
+- La IA ejecuta codigos aplacer hasta auditar los requerido y despues de eso genera un reporte y lo devuelve en formato PDF
 
 
 ### FuncionesForenses.psm1
