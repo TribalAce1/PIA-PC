@@ -106,6 +106,6 @@ TAREA #3:
 
 **Dependencias (librerías, comandos, entorno):**
 
-/docs/diagram.png
+/docs/diagrama.jpg
 
 
