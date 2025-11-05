@@ -1,4 +1,4 @@
-**Título: AutoForense**
+**Título:** AutoForense
 
 **Nombre representativo que refleje el enfoque general:**
 Automatización Inteligente de Análisis Forense en Sistemas Windows
