@@ -16,7 +16,7 @@ TAREA #1:
 
 
 
-**Función, rol o área de la ciberseguridad relacionada (SOC, Red Team, DFIR, etc.):**
+**Función, rol o área de la ciberseguridad relacionada (SOC, Red Team, DFIR, etc.):**  
 
 
 
@@ -106,6 +106,6 @@ TAREA #3:
 
 **Dependencias (librerías, comandos, entorno):**
 
-/docs/diagrama.jpg
+!(/docs/diagrama.jpg)
 
 
