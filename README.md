@@ -40,5 +40,6 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 ## Declaracion legal
 
 AutoForense se proporciona “tal cual”, sin garantías de ningún tipo. Su uso es bajo su exclusiva responsabilidad. Ni el autor ni los distribuidores serán responsables por daños directos, indirectos, incidentales, consecuentes o de cualquier otra índole derivados del uso o mal uso del software. AutoForense no sustituye asesoría profesional forense ni legal; el usuario debe verificar el cumplimiento de todas las leyes y regulaciones aplicables. Al instalar o usar AutoForense, usted acepta mantener indemnes a sus desarrolladores y colaboradores frente a cualquier reclamación o responsabilidad.
+
 Este proyecto se desarrollará exclusivamente con datos sintéticos o simulados. No se utilizarán datos reales, credenciales privadas ni información sensible. Todos los experimentos se ejecutarán en entornos controlados.  
 El equipo se compromete a documentar cualquier riesgo ético y aplicar medidas de mitigación adecuadas
