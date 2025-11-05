@@ -35,7 +35,7 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
   - `Get-FullForensicAnalysis`: Ejecuta un análisis forense completo combinando todas las funciones
 
 ## Diagrama del flujo de trabajo del programa
-![Diagrama](docs/diagrama.jpg)
+![Diagrama](docs/diagrama.png)
  
 ## Declaracion legal
  
