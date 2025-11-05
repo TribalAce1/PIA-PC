@@ -169,5 +169,5 @@ Uso limitado a propósitos educativos o de auditoría.
 PowerShell + API externa (por ejemplo, Google AI, VirusTotal o AbuseIPDB).
 
 Acceso a internet.
-(![Diagrama]docs/diagrama.jpg)
+(![Diagrama]docs/diagrama.png)
 
