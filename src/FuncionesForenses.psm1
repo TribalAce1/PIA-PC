@@ -1,8 +1,3 @@
-# ============================================================================
-# = Evidencia 7: Automatización de tareas forenses con PowerShell en Windows =
-# ============================================================================
-
-
 # 1. Extracción de eventos relevantes del Visor de eventos (registros de eventos)
 function Get-SuspiciousEvents {
     <#

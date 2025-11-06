@@ -5,7 +5,7 @@ Código principal del proyecto
 import sys
 import os
 import subprocess
-from powershell_helper import PowerShellHelper
+from PowershellHelper import PowerShellHelper
 
 
 def mostrar_bienvenida():
