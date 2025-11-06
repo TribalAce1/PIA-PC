@@ -1,0 +1,7 @@
+# AutoForense - Dependencias Python
+# No se requieren dependencias externas adicionales
+# El proyecto usa solo módulos estándar de Python:
+# - subprocess (para ejecutar PowerShell)
+# - json (para procesar datos)
+# - os (para manejo de rutas)
+
