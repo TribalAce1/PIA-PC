@@ -38,6 +38,5 @@ ENV/
 Thumbs.db
 
 # Project specific
-*.csv
-*.log
+
 
