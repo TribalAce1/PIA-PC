@@ -9,7 +9,6 @@ from PowershellHelper import PowerShellHelper
 
 
 def mostrar_bienvenida():
-    """Muestra el arte ASCII de bienvenida en verde usando PowerShell"""
     art = r"""
       .~~~~`\~~\\
      ;       ~~ \\
