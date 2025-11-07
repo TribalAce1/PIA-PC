@@ -112,161 +112,61 @@ function Get-UnsignedProcesses {
     .SYNOPSIS
         Comando para obtener los servicios no firmados en el sistema
     .DESCRIPTION
-        Comando para obtener los servicios no firmados en el sistema
+        Comando para obtener los servicios no firmados en el sistema. Ahora puede exportar los resultados a CSV.
+    .PARAMETER OutputPath
+        Ruta del archivo CSV de salida. Por defecto: "$PWD\procesos_sin_firma_dd_MM_yyyy.csv"
+    .PARAMETER DontSaveReport
+        Si se especifica, no se guardará el CSV y sólo se devolverá la colección en memoria.
     #>
+    [CmdletBinding()]
+    param(
+        [string]$OutputPath = "$PWD\procesos_sin_firma_$(Get-Date -Format dd_MM_yyyy).csv",
+        [switch]$DontSaveReport
+    )
+
     $processes = Get-Process
-    $detected = $null
+    $results = @()
+    $detected = $false
 
     # Recorremos cada proceso y verificamos su firma digital
     foreach ($process in $processes) {
         $filePath = $process.Path
-        if ($null -ne $filePath) { 
-            $signature = Get-AuthenticodeSignature -FilePath "$filePath"
-            if ($signature.Status -eq 'NotSigned' -or $signature.Status -eq 'Unknown') {
+        if ($null -ne $filePath) {
+            try {
+                $signature = Get-AuthenticodeSignature -FilePath $filePath -ErrorAction Stop
+                $status = $signature.Status
+                $signer = if ($signature.SignerCertificate) { $signature.SignerCertificate.Subject } else { $null }
+            }
+            catch {
+                # Si no se puede leer la firma, lo consideramos Unknown
+                $status = 'Unknown'
+                $signer = $null
+            }
+
+            if ($status -eq 'NotSigned' -or $status -eq 'Unknown') {
                 Write-Host "Proceso no firmado detectado: $($process.ProcessName) (PID: $($process.Id)) - Ruta: $filePath"
-                # Si se detecta al menos un proceso sin firma cambiamos el valor de $detected de null a 1
-                $detected = 1
-            }
-        }
-    }
-
-    # Si no se detectó ningún proceso sin firma, mostramos un mensaje indicándolo
-    if ($null -eq $detected) {
-        Write-Output "No se detectaron procesos sin firma digital."
-    }
-}
-
-
-# 3. Investigación de direcciones IP remotas mediante AbuseIPDB
-function Get-SuspiciousInternetProcesses {
-    <#
-    .SYNOPSIS
-        Comando que verifica las conexiones a internet y ivestiga si son confiables con el api de AbuseIPDB
-    .DESCRIPTION
-        Comando que verifica las conexiones a internet y ivestiga si son confiables con el api de AbuseIPDB y guarda un reporte
-    .PARAMETER DontSaveReport
-        Este parametro nos permite ejecutar el comando sin guardar el reporte
-    .PARAMETER Threshold
-        Este parametro nos permite ajustar la sensibilidad de la deteccion de AbuseIPDB [int] 0-100 
-    #>
-    [CmdletBinding()]
-    param(
-        [int] $Threshold = 10,
-
-        [switch]$DontSaveReport
-    )
-
-
-    # Inicializar la lista de resultados
-    $results = @()
-
-    # Obtener conexiones TCP establecidas
-    $TCPConnections = Get-NetTCPConnection | Where-Object State -eq "Established"
-    $Processes = Get-Process
-
-    foreach ($connection in $TCPConnections) {
-        $ip = $connection.RemoteAddress
-
-        try {
-            # Llamada a AbuseIPDB
-            $response = Invoke-RestMethod -Method Get `
-                -Uri "https://api.abuseipdb.com/api/v2/check?ipAddress=$ip" `
-                -Headers @{
-                    "Key"    = "yourapikey"
-                    "Accept" = "application/json"
-                }
-
-            $score = $response.data.abuseConfidenceScore
-
-            # Agregar sólo si supera el umbral
-            if ($score -ge $Threshold) {
-                $proc = $Processes | Where-Object Id -eq $connection.OwningProcess
+                $detected = $true
                 $results += [PSCustomObject]@{
-                    Timestamp          = (Get-Date).ToString("s")
-                    ProcessName        = $proc.ProcessName
-                    PID                = $proc.Id
-                    RemoteAddress      = $ip
-                    AbuseConfidencePct = $score
-                    TotalReports       = $response.data.totalReports
+                    ProcessName     = $process.ProcessName
+                    PID             = $process.Id
+                    Path            = $filePath
+                    SignatureStatus = $status
+                    Signer          = $signer
                 }
             }
         }
-        catch {
-            Write-Warning "Error consultando AbuseIPDB"
-        }
     }
 
-    # Exportar todos los resultados a CSV
-    if (-not $DontSaveReport){
+    # Exportar a CSV a menos que se pida omitirlo con el parámetro -DontSaveReport
+    if (-not $DontSaveReport) {
         if ($results.Count -gt 0) {
-            $results | Sort-Object AbuseConfidencePct -Descending |
-                Export-Csv -Path "$PWD\processos_sospechosos_abuseipdb_$(Get-Date -Format dd_MM_yyyy).csv" -NoTypeInformation -Encoding UTF8
+            $results | Sort-Object ProcessName | Export-Csv -Path $OutputPath -NoTypeInformation -Encoding UTF8
+            Write-Host "Exportación completada. Archivo: $OutputPath"
         }
         else {
-            Write-Output "No se encontraron IPs con puntaje de abuso mayor a $Threshold."
-    }
+            Write-Output "No se detectaron procesos sin firma digital."
+        }
     }
 
     return $results
-}
-
-function Get-FullForensicAnalysis {
-    [CmdletBinding()]
-    param(
-        [string]$OutputPath = ".\Full_Forensic_Report_{0}.csv" -f (Get-Date -Format "dd_MM_yyyy_HH_mm"),
-        [switch]$DontSaveReport
-    )
-
-    Write-Host "=== Iniciando análisis forense completo ===" -ForegroundColor Cyan
-
-    # 1. Obtener eventos sospechosos
-    Write-Host "[1/4] Extrayendo eventos sospechosos del Visor de eventos..." -ForegroundColor Yellow
-    $eventos = Get-SuspiciousEvents -DontSaveReport
-
-    # 2. Obtener procesos con conexiones de red
-    Write-Host "[2/4] Correlacionando procesos activos con conexiones de red..." -ForegroundColor Yellow
-    $internetProcs = Get-InternetProcesses -DontSaveReport
-
-    # 3. Obtener procesos con firmas no válidas
-    Write-Host "[3/4] Detectando procesos sin firma digital..." -ForegroundColor Yellow
-    $unsignedProcs = Get-UnsignedProcesses
-
-    # 4. Procesos con IPs sospechosas (AbuseIPDB)
-    Write-Host "[4/4] Consultando IPs sospechosas en AbuseIPDB..." -ForegroundColor Yellow
-    $suspiciousIPs = Get-SuspiciousInternetProcesses -Threshold 10 -DontSaveReport
-
-    # --- Correlación ---
-    Write-Host "Correlacionando resultados..." -ForegroundColor Green
-
-    # Convertir a tablas para correlación por nombre de proceso o PID
-    $internetProcsTable = $internetProcs | Select-Object ProcessName, Id, RemoteAddress
-    $unsignedProcsTable = $unsignedProcs | Select-Object ProcessName, Id
-    $suspiciousIPsTable = $suspiciousIPs | Select-Object ProcessName, Id, RemoteAddress
-
-    # Unir datos por coincidencia de PID o nombre
-    $correlacion = @()
-
-    foreach ($proc in $internetProcsTable) {
-        $matchUnsigned = $unsignedProcsTable | Where-Object { $_.Id -eq $proc.Id }
-        $matchSuspiciousIP = $suspiciousIPsTable | Where-Object { $_.Id -eq $proc.Id }
-
-        if ($matchUnsigned -or $matchSuspiciousIP) {
-            $correlacion += [PSCustomObject]@{
-                ProcessName   = $proc.ProcessName
-                PID           = $proc.Id
-                RemoteAddress = $proc.RemoteAddress
-                Unsigned      = if ($matchUnsigned) { $true } else { $false }
-                SuspiciousIP  = if ($matchSuspiciousIP) { $true } else { $false }
-            }
-        }
-    }
-
-    # --- Generar reporte ---
-    if (-not $DontSaveReport) {
-        $correlacion | Export-Csv -Path $OutputPath -NoTypeInformation -Encoding UTF8
-        Write-Host "Reporte generado en: $OutputPath" -ForegroundColor Cyan
-    }
-
-    Write-Host "=== Análisis forense completo finalizado ===" -ForegroundColor Cyan
-    return $correlacion
 }

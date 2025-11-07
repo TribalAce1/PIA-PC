@@ -37,8 +37,6 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
   - `Get-SuspiciousEvents`: Extrae eventos sospechosos del Visor de eventos de Windows
   - `Get-InternetProcesses`: Correlaciona procesos activos con conexiones de red
   - `Get-UnsignedProcesses`: Detecta procesos sin firma digital válida
-  - `Get-SuspiciousInternetProcesses`: Investiga direcciones IP remotas usando AbuseIPDB API
-  - `Get-FullForensicAnalysis`: Ejecuta un análisis forense completo combinando todas las funciones
 
 ## Diagrama del flujo de trabajo del programa
 ![Diagrama](docs/diagrama.png)

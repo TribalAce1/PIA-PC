@@ -44,5 +44,3 @@ else:
 - `get_suspicious_events()` - Extrae eventos sospechosos del Visor de eventos
 - `get_internet_processes()` - Correlaciona procesos con conexiones de red
 - `get_unsigned_processes()` - Detecta procesos sin firma digital
-- `get_suspicious_internet_processes()` - Investiga IPs sospechosas
-- `get_full_forensic_analysis()` - Análisis forense completo
