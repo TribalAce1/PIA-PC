@@ -17,5 +17,6 @@ Analiza los siguientes datos forenses y genera un reporte con las siguientes sec
 - **1)** Actividades o archivos sospechosos detectados
 - **2)** Posibles causas o anomalías
 - **3)** Recomendaciones de seguridad
+
 Datos recopilados:
 <contenido_recopilado_por_FuncionesForenses.psm1>
