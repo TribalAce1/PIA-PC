@@ -9,32 +9,32 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 /
 │
 ├── src/
-│   ├── AutoForense.py          # Código principal del proyecto (interfaz de usuario)
-│   ├── FuncionesForenses.psm1  # Funciones de investigación forense (módulo PowerShell)
-│   ├── PowershellHelper.py     # Helper para ejecutar funciones PowerShell desde Python
-│   ├── AIAnalyzer.py           # Módulo de análisis con IA (Google AI/Gemini)
-│   ├── PDFGenerator.py         # Generador de reportes en PDF
-│   ├── Prompt.txt              # Prompt del sistema para la IA
-│   └── reportes/               # Directorio de reportes generados (PDFs)
+│   ├── AutoForense.py           # Código principal del proyecto (interfaz de usuario)
+│   ├── FuncionesForenses.psm1   # Funciones de investigación forense (módulo PowerShell)
+│   ├── PowershellHelper.py      # Helper para ejecutar funciones PowerShell desde Python
+│   ├── AIAnalyzer.py            # Módulo de análisis con IA (Google AI/Gemini)
+│   ├── PDFGenerator.py          # Generador de reportes en PDF
+│   ├── Prompt.txt               # Prompt del sistema para la IA
+│   └── reportes/                # Directorio de reportes generados (PDFs)
 │
 ├── docs/
-│   ├── ai_plan.md              # Plan de desarrollo y arquitectura del sistema
-│   ├── diagrama.png            # Diagrama del flujo de trabajo del programa
-│   └── README.md               # Archivo de documentación adicional
+│   ├── ai_plan.md               # Plan de desarrollo y arquitectura del sistema
+│   ├── diagrama.png             # Diagrama del flujo de trabajo del programa
+│   └── README.md                # Archivo de documentación adicional
 │
-├── ejemplos/                   # Ejemplos de uso y resultados de salida
-│   ├── eventos_sospechosos_*.csv        # Ejemplo de eventos sospechosos extraídos
-│   ├── procesos_sin_firma_*.csv         # Ejemplo de procesos sin firma digital
-│   ├── reporte_procesos_internet_*.csv  # Ejemplo de procesos con conexión a red
+├── ejemplos/                                    # Ejemplos de uso y resultados de salida
+│   ├── eventos_sospechosos_*.csv                # Ejemplo de eventos sospechosos extraídos
+│   ├── procesos_sin_firma_*.csv                 # Ejemplo de procesos sin firma digital
+│   ├── reporte_procesos_internet_*.csv          # Ejemplo de procesos con conexión a red
 │   ├── reporte_forense_consolidado_ejemplo.pdf  # Ejemplo de reporte final
-│   └── README.md                        # Documentación de ejemplos
+│   └── README.md                                # Documentación de ejemplos
 │
-├── .gitignore                  # Archivos ignorados por git
-├── ejecutar_autoforense.bat    # Script de ejecución rápida (Windows)
-├── generar_presentacion.py     # Generador de presentación del proyecto
+├── .gitignore                     # Archivos ignorados por git
+├── ejecutar_autoforense.bat       # Script de ejecución rápida (Windows)
+├── generar_presentacion.py        # Generador de presentación del proyecto
 ├── AutoForense_Presentacion.pptx  # Presentación del proyecto
-├── requirements.txt            # Dependencias del proyecto (Python)
-└── README.md                   # Archivo con la información principal del programa 
+├── requirements.txt               # Dependencias del proyecto (Python)
+└── README.md                      # Archivo con la información principal del programa 
 ```
 
 ## Propósitos
