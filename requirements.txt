@@ -1,7 +1,15 @@
 # AutoForense - Dependencias Python
-# No se requieren dependencias externas adicionales
-# El proyecto usa solo módulos estándar de Python:
+
+# Google AI para análisis forense inteligente
+google-generativeai>=0.3.0
+
+# Generación de reportes PDF
+reportlab>=4.0.0
+
+# Manejo de variables de entorno
+python-dotenv>=1.0.0
+
+# Módulos estándar de Python (no requieren instalación):
 # - subprocess (para ejecutar PowerShell)
 # - json (para procesar datos)
 # - os (para manejo de rutas)
-

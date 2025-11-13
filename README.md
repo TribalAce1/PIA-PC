@@ -11,8 +11,10 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 ├── src/
 │   ├── AutoForense.py          # Código principal del proyecto (interfaz de usuario)
 │   ├── FuncionesForenses.psm1  # Funciones de investigación forense (módulo PowerShell)
-│   ├── Prompt.txt              # Prompt del sistema
-│   └── PowershellHelper.py     # Helper para ejecutar funciones PowerShell desde Python
+│   ├── PowershellHelper.py     # Helper para ejecutar funciones PowerShell desde Python
+│   ├── AIAnalyzer.py           # Módulo de análisis con IA (Google AI/Gemini)
+│   ├── PDFGenerator.py         # Generador de reportes en PDF
+│   └── Prompt.txt              # Prompt del sistema para la IA
 │
 ├── docs/
 │   ├── diagrama.png             # Diagrama del flujo de trabajo del programa
@@ -26,17 +28,65 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 └── README.md                    # Archivo con la información principal del programa 
 ```
 
-## Propositos
-- Autoforense.py Captura las tareas a revisar que seleccione el usuario.
-- FuncionesForenses.psm1 envia los datos recopilados a la Inteligencia Artificial (IA).
-- La IA ejecuta codigos a placer hasta auditar lo requerido y despues de eso genera un reporte y lo devuelve en formato PDF.
+## Propósitos
+- **AutoForense.py** - Captura las tareas a revisar que seleccione el usuario.
+- **FuncionesForenses.psm1** - Recopila datos forenses del sistema Windows.
+- **AIAnalyzer.py** - Envía los datos recopilados a la Inteligencia Artificial (Google AI/Gemini).
+- **PDFGenerator.py** - La IA analiza los datos y genera un reporte detallado en formato PDF.
 
 
-### FuncionesForenses.psm1
-- **FuncionesForenses.psm1**: Módulo de powershell que contiene funciones para análisis forense
-  - `Get-SuspiciousEvents`: Extrae eventos sospechosos del Visor de eventos de Windows
-  - `Get-InternetProcesses`: Correlaciona procesos activos con conexiones de red
-  - `Get-UnsignedProcesses`: Detecta procesos sin firma digital válida
+## Instalación y Configuración
+
+### Requisitos
+- Python 3.8 o superior
+- PowerShell 5.1 o superior (incluido en Windows 10/11)
+- API Key de Google AI (para funciones de IA)
+
+### Instalación
+
+1. **Instalar dependencias:**
+```bash
+pip install -r requirements.txt
+```
+
+2. **Configurar API Key de Google AI:**
+   - Obtén tu API key en: https://makersuite.google.com/app/apikey
+   - Crea un archivo `.env` en la raíz del proyecto:
+   ```
+   GOOGLE_API_KEY=tu_api_key_aqui
+   ```
+
+3. **Ejecutar el programa:**
+
+**Windows (Recomendado):**
+```bash
+# Doble click en ejecutar_autoforense.bat
+# O desde PowerShell/CMD como administrador:
+.\ejecutar_autoforense.bat
+```
+
+**O manualmente:**
+```bash
+cd src
+python AutoForense.py
+```
+
+> 💡 **Nota:** AutoForense ahora verifica e instala automáticamente las dependencias faltantes al iniciar.
+
+📖 **Documentación adicional:**
+- [Plan de Desarrollo](docs/ai_plan.md)
+- Ejemplos de salida en carpeta `ejemplos/`
+
+## Funcionalidades
+
+### Modo Básico (sin IA)
+1. **Get-SuspiciousEvents** - Extrae eventos sospechosos del Visor de eventos de Windows
+2. **Get-InternetProcesses** - Correlaciona procesos activos con conexiones de red
+3. **Get-UnsignedProcesses** - Detecta procesos sin firma digital válida
+
+### Modo con IA (requiere API key)
+4. **Análisis Forense con IA** - Ejecuta una tarea específica y la analiza con IA, generando reporte PDF
+5. **Análisis Forense Completo** - Ejecuta todas las tareas, análisis consolidado y genera reporte PDF completo
 
 ## Diagrama del flujo de trabajo del programa
 ![Diagrama](docs/diagrama.png)
