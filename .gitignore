@@ -40,5 +40,6 @@ Thumbs.db
 # Project specific
 .env
 reportes/
-
+*.csv
+*.pdf
 
