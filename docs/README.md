@@ -355,16 +355,5 @@ AutoForense se proporciona "tal cual", sin garantías. El usuario es responsable
 4. Push: `git push origin feature/nueva-funcionalidad`
 5. Crear Pull Request
 
----
-
-## Roadmap
-
-**v1.1** (Próximamente):
-- Integración con VirusTotal API
-- Análisis de memoria dump
-- Dashboard web
-- Exportación STIX/TAXII
-
----
 
 **AutoForense v1.0** - Documentación actualizada: Noviembre 2025

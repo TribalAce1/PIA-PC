@@ -31,7 +31,6 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 │
 ├── .gitignore                     # Archivos ignorados por git
 ├── ejecutar_autoforense.bat       # Script de ejecución rápida (Windows)
-├── generar_presentacion.py        # Generador de presentación del proyecto
 ├── AutoForense_Presentacion.pptx  # Presentación del proyecto
 ├── requirements.txt               # Dependencias del proyecto (Python)
 └── README.md                      # Archivo con la información principal del programa 
