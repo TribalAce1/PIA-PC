@@ -281,18 +281,9 @@ def main():
                     # Generar reporte PDF consolidado
                     print("\n[Generando reporte PDF consolidado...]")
                     
-                    # Análisis individuales (opcional, para incluir en el reporte)
-                    individual_analyses = {}
-                    for task_name, data in tasks_data.items():
-                        analysis = ai_analyzer.analyze_forensic_data(
-                            task_name=task_name,
-                            data=data
-                        )
-                        if analysis['success']:
-                            individual_analyses[task_name] = analysis
-                    
+                    # Usar solo el análisis consolidado (evita múltiples requests a la API)
                     pdf_path = pdf_generator.generate_multiple_tasks_report(
-                        tasks_analyses=individual_analyses,
+                        tasks_analyses={},  # Sin análisis individuales
                         consolidated_analysis=consolidated_analysis
                     )
                     print(f"✓ Reporte PDF consolidado generado: {pdf_path}")

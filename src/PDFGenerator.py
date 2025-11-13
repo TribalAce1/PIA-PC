@@ -401,28 +401,29 @@ class PDFGenerator:
                         consolidated_analysis['analysis']['recommendations']
                     ))
         
-        # Análisis por tarea
-        story.append(PageBreak())
-        heading = Paragraph("Análisis Detallado por Tarea", self.styles['CustomHeading'])
-        story.append(heading)
-        story.append(Spacer(1, 12))
-        
-        for task_name, analysis in tasks_analyses.items():
-            task_heading = Paragraph(f"Tarea: {task_name}", self.styles['CustomHeading'])
-            story.append(task_heading)
+        # Análisis por tarea (solo si hay análisis individuales)
+        if tasks_analyses:
+            story.append(PageBreak())
+            heading = Paragraph("Análisis Detallado por Tarea", self.styles['CustomHeading'])
+            story.append(heading)
+            story.append(Spacer(1, 12))
             
-            if 'summary_short' in analysis:
-                story.append(Paragraph(analysis['summary_short'], self.styles['CustomBody']))
-            
-            if 'analysis' in analysis and 'findings' in analysis['analysis']:
-                findings = analysis['analysis']['findings']
-                if findings:
-                    story.append(Paragraph(
-                        f"<b>Hallazgos encontrados:</b> {len(findings)}",
-                        self.styles['CustomBody']
-                    ))
-            
-            story.append(Spacer(1, 20))
+            for task_name, analysis in tasks_analyses.items():
+                task_heading = Paragraph(f"Tarea: {task_name}", self.styles['CustomHeading'])
+                story.append(task_heading)
+                
+                if 'summary_short' in analysis:
+                    story.append(Paragraph(analysis['summary_short'], self.styles['CustomBody']))
+                
+                if 'analysis' in analysis and 'findings' in analysis['analysis']:
+                    findings = analysis['analysis']['findings']
+                    if findings:
+                        story.append(Paragraph(
+                            f"<b>Hallazgos encontrados:</b> {len(findings)}",
+                            self.styles['CustomBody']
+                        ))
+                
+                story.append(Spacer(1, 20))
         
         # Pie de página
         story.extend(self._create_footer())
