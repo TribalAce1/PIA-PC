@@ -1,0 +1,3 @@
+﻿"ProcessName","PID","Path","SignatureStatus","Signer"
+"EdgeGameAssist","2184","C:\Program Files\WindowsApps\Microsoft.Edge.GameAssist_1.0.3456.0_x64__8wekyb3d8bbwe\EdgeGameAssist.exe","NotSigned",
+"WidgetService","15740","C:\Program Files\WindowsApps\Microsoft.WidgetsPlatformRuntime_1.6.14.0_x64__8wekyb3d8bbwe\WidgetService\WidgetService.exe","NotSigned",

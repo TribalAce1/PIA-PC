@@ -1,22 +1,51 @@
-# Propósito del uso de IA en el proyecto
-La ia ejecutará códigos a placer hasta auditar lo requerido y despues se generara un reporte en formato pdf y lo devolverá.
+# Plan de Integración de IA - AutoForense
 
-# Punto del flujo donde se integrará
-Se integrará al final del flujo de recopilación de datos, una vez que las tres tareas generen sus salidas en un formato estructurado.
-El flujo seria de la siguiente manera:
-- **1)** El usuario seleccionará las tareas que desee desde el script principal.
-- **2)** Los resultados se exportarán en archivos y enviados a la IA para raelizar el análisis.
-- **3)** La IA procesará, generará un resumen y redactará el reporte final.
+## Propósito del uso de IA
+La IA analiza automáticamente los datos forenses recopilados del sistema Windows, detecta comportamientos sospechosos y genera reportes detallados en PDF con recomendaciones de seguridad.
 
-# Tipo  de modelo/API a utilizar 
-Se utilizara **Google AI API**, lo cual proporciona modelos de lenguaje y análisis basados en aprendizaje automático. 
-El sistema se conecta a esta API desde el script AutoForense.py para enviarles los datos recolectados y recibir respuestas estructuradas o reportes generados automáticamente. 
+## Punto de integración en el flujo
+Se integra después de la recopilación de datos:
 
-# Ejemplo de prompt inicial 
-Analiza los siguientes datos forenses y genera un reporte con las siguientes secciones:
-- **1)** Actividades o archivos sospechosos detectados
-- **2)** Posibles causas o anomalías
-- **3)** Recomendaciones de seguridad
+1. **Usuario** selecciona las tareas forenses desde `AutoForense.py`
+2. **PowerShell** recopila datos del sistema (`FuncionesForenses.psm1`)
+3. **IA** analiza los datos y detecta anomalías (`AIAnalyzer.py`)
+4. **PDF** genera el reporte final (`PDFGenerator.py`)
+
+## Modelo de IA utilizado
+**API:** Google AI (Generative AI)  
+**Modelo:** Gemini 1.5 Flash  
+**Razón:** Balance entre velocidad, capacidad de análisis y costo-efectividad
+
+## Ejemplo de prompt del sistema
+```
+Eres un experto en análisis forense digital y ciberseguridad especializado en sistemas Windows.
+
+Analiza los siguientes datos forenses y genera un reporte estructurado con:
+1. Resumen ejecutivo de hallazgos
+2. Actividades o procesos sospechosos detectados
+3. Nivel de riesgo (Bajo, Medio, Alto, Crítico)
+4. Posibles causas o anomalías
+5. Recomendaciones de seguridad priorizadas
 
 Datos recopilados:
-<contenido_recopilado_por_FuncionesForenses.psm1>
+<datos_forenses_en_formato_csv>
+```
+
+## Formato de respuesta esperado
+La IA devuelve un JSON estructurado con:
+- Resumen ejecutivo
+- Hallazgos principales con nivel de riesgo
+- Análisis detallado por categoría (eventos, procesos, red)
+- Recomendaciones priorizadas
+- Conclusión y próximos pasos
+
+## Modos de análisis disponibles
+- **Análisis individual:** Una tarea específica con reporte focalizado
+- **Análisis completo:** Todas las tareas con reporte consolidado
+- **Modo básico:** Exportación CSV sin análisis de IA
+
+## Seguridad
+- API Key en archivo `.env`
+- Datos procesados localmente
+- Sin almacenamiento en servidores externos
+- Reportes PDF guardados en `src/reportes/`
