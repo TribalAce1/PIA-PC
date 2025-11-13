@@ -23,9 +23,9 @@ AutoForense es una herramienta desarrollada en PowerShell que permite automatiza
 │   └── README.md                # Archivo de documentación adicional
 │
 ├── ejemplos/                                    # Ejemplos de uso y resultados de salida
-│   ├── eventos_sospechosos_*.csv                # Ejemplo de eventos sospechosos extraídos
-│   ├── procesos_sin_firma_*.csv                 # Ejemplo de procesos sin firma digital
-│   ├── reporte_procesos_internet_*.csv          # Ejemplo de procesos con conexión a red
+│   ├── eventos_sospechosos_ejemplo.csv          # Ejemplo de eventos sospechosos extraídos
+│   ├── procesos_sin_firma_ejemplo.csv           # Ejemplo de procesos sin firma digital
+│   ├── reporte_procesos_internet_ejemplo.csv    # Ejemplo de procesos con conexión a red
 │   ├── reporte_forense_consolidado_ejemplo.pdf  # Ejemplo de reporte final
 │   └── README.md                                # Documentación de ejemplos
 │
