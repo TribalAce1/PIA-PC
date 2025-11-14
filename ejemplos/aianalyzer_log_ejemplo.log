@@ -1,0 +1,10 @@
+2025-11-13 20:54:34,763 - AIAnalyzer - INFO - Inicializando AIAnalyzer...
+2025-11-13 20:54:34,763 - AIAnalyzer - INFO - Google AI configurado correctamente
+2025-11-13 20:54:34,763 - AIAnalyzer - INFO - Modelo Gemini 2.5 Pro inicializado
+2025-11-13 20:54:34,764 - AIAnalyzer - INFO - Prompt del sistema cargado desde C:\Users\etc...\Prompt.txt
+2025-11-13 20:54:34,764 - AIAnalyzer - INFO - AIAnalyzer inicializado exitosamente
+2025-11-13 20:55:05,534 - AIAnalyzer - INFO - Iniciando análisis forense para tarea: Get-InternetProcesses
+2025-11-13 20:55:05,534 - AIAnalyzer - INFO - Enviando solicitud a Google AI (Gemini)...
+2025-11-13 20:55:42,465 - AIAnalyzer - INFO - Respuesta recibida exitosamente de Google AI
+2025-11-13 20:55:42,467 - AIAnalyzer - INFO - JSON parseado correctamente de la respuesta de IA
+2025-11-13 20:55:42,467 - AIAnalyzer - INFO - Análisis completado exitosamente para tarea: Get-InternetProcesses
